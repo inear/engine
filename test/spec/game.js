@@ -148,6 +148,7 @@ describe("Game", function () {
       game.create('test');
       expect(game.add('test', 'testComponent', {})).toBe(true);
       expect(game.remove('test', 'testComponent', '0')).toBe(true);
+      //can't remove since it's gone already
       expect(game.remove('test', 'testComponent', '0')).toBe(false);
       
       console.log(game);
