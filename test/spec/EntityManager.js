@@ -56,6 +56,18 @@ describe("EntityManager", function () {
         });
     });
 
+    describe("remove", function () {
+        it("should return false if entity does not exist", function () {
+            expect(entities.remove("component", "entity")).toBe(false);
+        });
+
+        it("should remove a component from an entity", function () {
+            entities.create("test");
+            expect(entities.add("fizz", "1", "test")).toBe(true);
+            expect(entities.remove("fizz", "test")).toBe(true);
+        });
+    });
+
     describe("index", function () {
         it("should return false if the parameter is invalid", function () {
             expect(entities.index()).toBe(false);

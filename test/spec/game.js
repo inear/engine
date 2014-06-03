@@ -119,8 +119,37 @@ describe("Game", function () {
   });
 
   describe("remove", function () {
-    it("should be tested", function () {
-      expect(false).toBe(true);
+    it("should not do anything if the object does not exist", function () {
+      var result;
+      result = game.remove('test', 'test', {});
+
+      expect(result).toBe(false);
+    });
+
+    it("should not do anything if the component does not exist", function () {
+      var result;
+      game.use('testComponent', mock.component);
+      game.create('test');
+      expect(game.add('test', 'testComponent', {})).toBe(true);
+      expect(game.remove('test', 'testAnotherComponent', '1')).toBe(false);
+    });
+
+    it("should return false if component id not present on instance", function () {
+      var result;
+      game.use('testComponent', mock.component);
+      game.create('test');
+      expect(game.add('test', 'testComponent', {})).toBe(true);
+      expect(game.remove('test', 'testComponent', '1')).toBe(false);
+    });
+
+    it("should remove component from instance", function () {
+      var result;
+      game.use('testComponent', mock.component);
+      game.create('test');
+      expect(game.add('test', 'testComponent', {})).toBe(true);
+      expect(game.remove('test', 'testComponent', '0')).toBe(true);
+      expect(game.components.instances['testComponent'].length === 0 ).toBe(true);
+      console.log(game);
     });
   });
 
